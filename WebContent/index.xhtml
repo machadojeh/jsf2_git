@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet library="css" name="styles.css" />
+<title>Testezinho</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<h:commandLink action="#{localeChanger.englishAction}">
+			<h:graphicImage library="images" name="en_flag.gif"/>
+		</h:commandLink>
+	</h:form>
+
+	<p>Oiii galeriiinha!!</p>
+
+	<h:form>
+	
+		
+		<p><h:inputText id="name" value="#{user.name}" required="true"/></p>
+		<h:message for="name" /> <!-- mostra erro se submeter o form e o nome for vazio -->	
+		<p><h:inputSecret id="pass" value="#{user.password}" redisplay="true"/></p>
+		
+		<h:commandButton value="Ola">
+    		<f:ajax execute="name pass" render="out" />
+		</h:commandButton>
+		
+		<p><h:outputText id="out" value="#{user.ola}" /></p>
+			
+		<br/>
+		<h:graphicImage name="camisetas_final.png" library="images" width="70%"/>
+		
+		<h:panelGrid columns="2">
+			x
+			<p><h:inputText id="x" value="x"/></p>
+			y
+			<p><h:inputText id="y" value="y"/></p>
+			z
+			<p><h:inputText id="z" value="z"/></p>
+		</h:panelGrid>
+		
+		<h:outputFormat value="{0} is {1} years old" >
+			<f:param value="Bill" />
+			<f:param value="20" />
+		</h:outputFormat>
+	</h:form>
+	
+	<h3>DATA TABLES</h3>
+	
+	<h:form>
+		<h:dataTable value="#{user.items}" var="item">
+			<h:column>
+				#{item}
+			</h:column>
+			<h:column>
+				<h:commandLink value="Apagar" action="#{user.deleteRow(item)}"/>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	
+	<table>
+		<ui:repeat value="#{user.items}" var="item">
+		<tr>
+			<td>#{item}</td>
+		</tr>
+		</ui:repeat>
+	</table>
+	
+	<h:commandButton value="#{user.conexao()}"/>
+	
+</h:body>
+
+</html>
